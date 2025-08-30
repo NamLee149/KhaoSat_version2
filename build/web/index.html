@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <title>Murach's Java Servlets and JSP</title>
+    <link rel="stylesheet" href="style/main.css" type="text/css" />
+</head>
+<body>
+    <div class="survey_frame">
+        <img src="images/Murach_image.jpg" class="murach_picture" alt="Murach_image">
+        <h1>Survey</h1>
+        <p>If you have a moment, we'd appreciate it if you would fill out this survey.</p>
+        <h1>Your Information : </h1>
+        <form action="emailList" method="post">
+            <input type="hidden" name="action" value="add"> 
+    
+            <label>First Name:</label> 
+            <input type="text" name="firstName" required id="name"><br> 
+    
+            <label>Last Name:</label> 
+            <input type="text" name="lastName" required id="lastname"><br>
+    
+            <label>Email:</label>
+            <input type="email" name="email" required id="mail"><br> 
+    
+            <label>Date Of Birth</label>
+            <input type="date" name="dateOfBirth" required id="dob">
+
+            <div class="section">
+                <h2>How did you hear about us?</h2>
+                <input type="radio" id="search" name="heard" value="Search engine" checked>
+                <label for="search">Search engine</label>
+
+                <input type="radio" id="word" name="heard" value="Word of mouth">
+                <label for="word">Word of mouth</label>
+
+                <input type="radio" id="social" name="heard" value="Social Media">
+                <label for="social">Social Media</label>
+
+                <input type="radio" id="other" name="heard" value="Other">
+                <label for="other">Other</label>
+            </div>
+
+            <div class="section">
+                <h2>Would you like to receive announcements <br>
+                    about new CDs and special offers?</h2>
+                <div class="checkboxgroup">
+                    <input type="checkbox" id="yes1" name="announcement" value="YesGeneral">
+                    <label for="yes1">YES, I'd like that.</label>
+                </div>
+                <div class="checkboxgroup">
+                    <input type="checkbox" id="yes2" name="emailAnnouncement" value="YesEmail">
+                    <label for="yes2">YES, please send me email announcements.</label>
+                </div>
+
+                <div class="contactme">
+                    <label for="contact">Please contact me by:</label>
+                    <select id="contact" name="contact" class="contactoption">
+                        <option value="Email or postal mail">Email or postal mail</option>
+                        <option value="Email only">Email only</option>
+                        <option value="Postal mail only">Postal mail only</option>
+                    </select>
+                </div>
+            </div>
+
+            <input type="submit" value="Submit" class="submit-btn">
+</form>
+    </div>
+<script>
+    //ràng buộc cho các input
+  const fname = document.getElementById("name");
+
+  fname.oninvalid = function(event) {
+    event.target.setCustomValidity("Vui lòng điền thông tin đầy đủ");
+  }
+  
+  fname.oninput = function(event) {
+    event.target.setCustomValidity(""); 
+  }// reset lại khi nhập
+
+  const flastname = document.getElementById("lastname");
+
+  flastname.oninvalid = function(event) {
+    event.target.setCustomValidity("Vui lòng điền thông tin đầy đủ");
+  }
+
+  flastname.oninput = function(event) {
+    event.target.setCustomValidity(""); 
+  }// reset lại khi nhập
+
+
+  //ràng buộc cho email
+   const emailInput = document.getElementById("mail");
+
+  emailInput.oninvalid = function(event) {
+    if (event.target.validity.valueMissing) {
+      // Nếu để trống
+      event.target.setCustomValidity("Vui lòng nhập địa chỉ email.");
+    } else if (event.target.validity.typeMismatch) {
+      // Nếu sai định dạng email
+      event.target.setCustomValidity("Địa chỉ email không hợp lệ. Vui lòng nhập đúng định dạng (vd: ten@example.com).");
+    } else {
+      event.target.setCustomValidity("");
+    }
+  };
+
+  // Reset lại khi người dùng nhập
+  emailInput.oninput = function(event) {
+    event.target.setCustomValidity("");
+  };
+
+  //ràng buộc cho date of birth
+  const dobInput = document.getElementById("dob");
+
+  dobInput.oninvalid = function(event) {
+    if (event.target.validity.valueMissing) {
+      event.target.setCustomValidity("Vui lòng nhập ngày sinh của bạn.");
+    } else {
+      event.target.setCustomValidity("");
+    }
+  };
+
+  dobInput.oninput = function(event) {
+    event.target.setCustomValidity("");
+  };
+
+</script>
+</body>
+</html>
